@@ -19,32 +19,35 @@ On Shopify, we have exactly 100 sneaker shops, and each of these shops sells onl
 #### Question 2: For this question you’ll need to use SQL. [Follow this link](https://www.w3schools.com/SQL/TRYSQL.ASP?FILENAME=TRYSQL_SELECT_ALL) to access the data set required for the challenge. Please use queries to answer the following questions. Paste your queries along with your final numerical answers below.
 
 ###### a.	How many orders were shipped by Speedy Express in total?
-- select Count(OrderID) FROM Orders
-inner join Shippers 
-on Orders.ShipperId=Shippers.ShipperId
+
+- select Count(OrderID) FROM Orders  
+inner join Shippers  
+on Orders.ShipperId=Shippers.ShipperId  
 where ShipperName="Speedy Express";
 
 ###### b.	What is the last name of the employee with the most orders?
-- select LastName, a.EmployeeID,a.TotalOrders from 
-(select EmployeeID, Sum(Quantity) as TotalOrders from Orders
-inner join OrderDetails
-on OrderDetails.OrderId=Orders.OrderId
-group by Orders.EmployeeId)a
-inner join Employees
-on Employees.EmployeeID=a.EmployeeID
+
+- select LastName, a.EmployeeID,a.TotalOrders from  
+(select EmployeeID, Sum(Quantity) as TotalOrders from Orders  
+inner join OrderDetails  
+on OrderDetails.OrderId=Orders.OrderId  
+group by Orders.EmployeeId)a  
+inner join Employees  
+on Employees.EmployeeID=a.EmployeeID  
 order by TotalOrders desc
 limit 1;
 
 ###### c.	What product was ordered the most by customers in Germany?
-- select OrderDetails.Quantity, OrderDetails.ProductID, Products.ProductName
-from OrderDetails
-inner join Orders
-on OrderDetails.OrderID=Orders.OrderID
-inner join Products
-on OrderDetails.ProductID=Products.ProductID
-inner join Customers
-on Orders.CustomerID=Customers.CustomerID
-where Country="Germany"
-group by OrderDetails.ProductID
-order by OrderDetails.Quantity desc
+
+- select OrderDetails.Quantity, OrderDetails.ProductID, Products.ProductName  
+from OrderDetails  
+inner join Orders  
+on OrderDetails.OrderID=Orders.OrderID  
+inner join Products  
+on OrderDetails.ProductID=Products.ProductID  
+inner join Customers  
+on Orders.CustomerID=Customers.CustomerID  
+where Country="Germany"  
+group by OrderDetails.ProductID  
+order by OrderDetails.Quantity desc  
 limit 1;
